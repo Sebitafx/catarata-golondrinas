@@ -160,7 +160,7 @@ Workflow [`.github/workflows/ci-cd.yml`](.github/workflows/ci-cd.yml): en cada `
 
 ## 🎬 Video de evidencia en producción
 
-Ver [`docs/README.md`](docs/README.md): tras el deploy se sube ahí el video (haciendo un cambio, `push`, Actions en verde y app respondiendo en la IP de EC2).
+✅ Ver [`docs/video-produccion.mp4`](docs/video-produccion.mp4) (55 MB): cambio visible (badge 🟢 + footer v1.1) → `push` → Actions run #5 en verde (`test` + `deploy`) → app respondiendo en `http://3.148.214.177:8000/`. Detalle en [`docs/README.md`](docs/README.md).
 
 ## 🗺 Roadmap
 

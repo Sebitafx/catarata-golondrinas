@@ -16,10 +16,10 @@ Esta carpeta es donde se sube el video que pidió el docente **después del depl
 
 ## Plantilla para completar
 
-- Fecha del deploy: …
-- Commit del cambio: …
-- Run de Actions en verde: …
-- URL producción: `http://<IP>:8000/`
-- Enlace video: …
+- Fecha del deploy: 2026-09-25
+- Commit del cambio: `bac4f1c` (badge En vivo 🟢 + footer v1.1)
+- Run de Actions en verde: run #5 `success` (test + deploy)
+- URL producción: `http://3.148.214.177:8000/`
+- Enlace video: [`video-produccion.mp4`](./video-produccion.mp4) (55 MB, en esta carpeta)
 
-> Estado actual: pendiente de deploy a EC2. Esta carpeta ya existe a propósito para el commit del video.
+> Estado actual: ✅ en producción (systemd activo, pipeline verde).

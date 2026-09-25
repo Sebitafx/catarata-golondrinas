@@ -104,13 +104,14 @@ Cambio de cualquier S-* obliga a actualizar este spec primero (C8 constitución)
 
 ## 8. Criterios de aceptación global
 
-- [ ] `pytest` verde local con cobertura visible.
-- [ ] `/docs` muestra los 6 endpoints API (health + clima actual + clima pronostico + prediccion + historico GET/POST).
-- [ ] Predicción mediodía despejado finde > mañana lluvia fuerte laborable (demo guiada).
-- [ ] `GET /api/prediccion?hora=3` → `0` fuera de horario.
-- [ ] `POST /api/historico` sin `X-Admin-Key` → `401`, con válida → `201`.
-- [ ] Sin `.env` con key real commiteado.
-- [ ] App accesible en `http://<IP-EC2>:8000/docs`.
+- [x] `pytest` verde local con cobertura visible (11 passed).
+- [x] `/docs` muestra los 6 endpoints API (health + clima actual + clima pronostico + prediccion + historico GET/POST).
+- [x] Predicción mediodía despejado finde > mañana lluvia fuerte laborable (demo guiada).
+- [x] `GET /api/prediccion?hora=3` → `0` fuera de horario.
+- [x] `POST /api/historico` sin `X-Admin-Key` → `401`, con válida → `201`.
+- [x] Sin `.env` con key real commiteado (`.gitignore` + GitHub Secrets).
+- [x] App accesible en `http://3.148.214.177:8000/docs` (systemd EC2 Ohio, pipeline run #5 `success`).
+- [x] Video de evidencia en `docs/video-produccion.mp4` (cambio visible → push → Actions verde → producción).
 
 ## 9. Riesgos conocidos
 
