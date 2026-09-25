@@ -40,7 +40,7 @@
 | Entorno | URL |
 |---|---|
 | Local | `http://localhost:8000/` (dashboard) · `http://localhost:8000/docs` (Swagger) |
-| Producción EC2 | `http://<IP-PUBLICA-EC2>:8000/` y `/docs` (se completa tras el deploy) |
+| Producción EC2 | `http://3.148.214.177:8000/` (dashboard) · `http://3.148.214.177:8000/docs` (Swagger) |
 
 ## 🔮 ¿Qué predice y cómo?
 
