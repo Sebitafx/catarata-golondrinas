@@ -27,6 +27,7 @@
 - [Arquitectura](#-arquitectura)
 - [API](#-api)
 - [Estructura](#-estructura)
+- [Banco de datos](#-banco-de-datos-dónde-está-y-de-dónde-viene)
 - [Inicio rápido local](#-inicio-rápido-local)
 - [Tests](#-tests)
 - [Despliegue en AWS EC2](#-despliegue-en-aws-ec2)
@@ -94,6 +95,28 @@ Turista/Admin ──► Dashboard estático (dark default, fecha auto hoy Lima, 
 ├── docs/                        # video de evidencia en producción (ver docs/README.md)
 └── README.md
 ```
+
+## 🗄 Banco de datos (dónde está y de dónde viene)
+
+> Requisito del docente: el proyecto cuenta con banco de datos propio (creado por nosotros) + clima externo vía web (OpenWeatherMap).
+
+| Punto | Detalle |
+|---|---|
+| **Motor** | SQLite vía SQLAlchemy (cero servidor, ideal EC2 free-tier; migrable a PostgreSQL/RDS sin cambiar el ORM) |
+| **Archivo** | `backend/app/historico.db` (generado localmente y en EC2, **no se commitea** por `.gitignore`) |
+| **Tabla** | `historico_visitas(id, fecha, hora, temperatura_c, condicion_clima, es_fin_de_semana, visitantes)` + índice `(fecha, hora)` |
+| **Origen** | Sintético pero plausible: `backend/ml/seed_data.py` genera ~2190 registros (365 días × 6 franjas 08–18h, campana al mediodía × clima × 1.4 finde + ruido, `RANDOM_SEED=42`) y los inserta en SQLite; luego `train_model.py` entrena la regresión |
+| **Datos reales** | Entran por `POST /api/historico` (protegido con `X-Admin-Key`) para corregir el modelo con el tiempo |
+
+```bash
+# Regenerar el banco desde cero
+cd backend
+python -m ml.seed_data --check   # verifica 2190 registros en memoria
+python -m ml.poblar_db           # inserta 2190 filas en app/historico.db (idempotente)
+python -m ml.train_model         # deja app/model.pkl + model_meta.json (rmse≈5)
+```
+
+Verlo: extensión `SQLite Viewer` de VSCode / `DB Browser for SQLite` abriendo `backend/app/historico.db`, o en vivo `GET /api/historico?page=1&size=20` y el dashboard (tabla Últimos históricos).
 
 ## ⚡ Inicio rápido local
 
