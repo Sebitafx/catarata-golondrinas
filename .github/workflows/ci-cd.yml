@@ -1,0 +1,40 @@
+name: CI/CD - Catarata las Golondrinas
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Instalar dependencias
+        run: pip install --no-cache-dir -r backend/requirements.txt
+      - name: Ejecutar tests
+        run: pytest backend/tests --cov=backend/app --cov-report=term-missing -v
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Desplegar en EC2 vía SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/catarata-golondrinas
+            git pull origin main
+            cd backend
+            source .venv/bin/activate
+            pip install --no-cache-dir -r requirements.txt
+            python -m ml.train_model
+            sudo systemctl restart catarata-app

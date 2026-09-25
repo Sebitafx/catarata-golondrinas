@@ -1,0 +1,8 @@
+.env
+*.db
+*.pkl
+model_meta.json
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc

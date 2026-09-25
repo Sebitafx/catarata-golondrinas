@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catarata Las Golondrinas — Predicción de visitantes</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="dark">
+<header class="hero">
+  <img class="hero-bg" src="/static/img/catarata-hd.jpg" onerror="this.onerror=null;this.src='/static/img/hero.svg'" alt="Catarata en selva (foto referencial Full HD)">
+  <div class="hero-overlay">
+    <div class="hero-text">
+      <span class="badge">Huánuco · Tingo María · En vivo</span>
+      <h1>Catarata Las Golondrinas</h1>
+      <p>Río Tigre · Mariano Dámaso Beraún · Leoncio Prado</p>
+      <div class="hero-meta"><span id="reloj">--:--:--</span><span id="clima-chip">cargando clima…</span><button id="btn-tema" title="Cambiar tema">☀️ claro</button></div>
+    </div>
+  </div>
+</header>
+<main>
+  <section id="ficha-lugar" class="card grid2">
+    <div>
+      <h2>Ficha del lugar</h2>
+      <ul class="facts">
+        <li><b>Coords:</b> -8.7938, -76.3348 · Alt 1022 msnm · Caída ~15 m</li>
+        <li><b>Acceso:</b> 20 min carro desde Tingo María + 8 min caminata</li>
+        <li><b>Horario:</b> 08:00–18:00 · <b>Aforo práctico:</b> 40 personas</li>
+      </ul>
+      <div class="gallery">
+        <figure><img src="/static/img/lugar-catarata.jpg" onerror="this.onerror=null;this.src='/static/img/poza-hd.jpg'" alt="Catarata Las Golondrinas, foto real"><figcaption>Catarata · caída ~15 m (foto real)</figcaption></figure>
+        <figure><img src="/static/img/lugar-poza.jpg" onerror="this.onerror=null;this.src='/static/img/sendero-hd.jpg'" alt="Poza y acceso Río Tigre, foto real"><figcaption>Poza y acceso · Río Tigre (foto real)</figcaption></figure>
+      </div>
+      <small class="muted">Fotos reales del lugar. Hero superior sigue referencial hasta que me pases una panorámica propia.</small>
+    </div>
+    <div id="clima" class="clima-box">
+      <div class="clima-top"><h2>Clima actual</h2><span class="live"><span id="clima-dot" class="live-dot"></span>en vivo</span></div>
+      <div id="clima-data" class="clima-main">
+        <div class="clima-icon" id="clima-icon">…</div>
+        <div><div class="clima-temp" id="clima-temp">--°C</div><div id="clima-cond" class="clima-cond">cargando…</div></div>
+      </div>
+      <div class="clima-stats">
+        <div><span>Descripción</span><b id="clima-desc">—</b></div>
+        <div><span>Humedad</span><b id="clima-hum">—</b></div>
+        <div><span>Consulta Lima</span><b id="clima-hora">—</b></div>
+      </div>
+      <small>Fuente OpenWeather · cache 10 min · <span id="clima-coords">-8.7938, -76.3348</span></small>
+    </div>
+  </section>
+  <section id="prediccion" class="card highlight">
+    <h2>¿Conviene ir ahora o más tarde?</h2>
+    <p class="muted">Todo en tiempo real — la fecha es hoy (<span id="fecha-auto">…</span>) y no se puede predecir el pasado.</p>
+    <div class="controls">
+      <label>Hora <input type="number" id="hora" min="0" max="23" value="12"></label>
+      <button id="btn-predecir">Predecir afluencia</button>
+    </div>
+    <div id="prediccion-data" class="resultado">Elige hora y pulsa predecir.</div>
+    <div class="barra"><div id="barra-fill"></div></div>
+    <h3>Próximas franjas</h3><div id="franjas" class="franjas"></div>
+  </section>
+  <section class="card"><h2>Pronóstico próximas 24h (misma API)</h2><div id="pronostico" class="pronostico">Cargando…</div></section>
+  <section class="card"><h2>Últimos históricos</h2><div class="tabla-wrap"><table class="tabla"><thead><tr><th>Fecha</th><th>Hora</th><th>Visitantes</th><th>Clima</th><th>Temp</th></tr></thead><tbody id="historico-body"><tr><td colspan="5">Cargando…</td></tr></tbody></table></div></section>
+  <section class="card admin"><h2>Zona admin</h2>
+    <p>Solo escritura protegida con <code>X-Admin-Key</code>. Lecturas públicas sin login.</p>
+    <input type="password" id="adminkey" placeholder="X-Admin-Key">
+    <button id="btn-guardar">Guardar registro actual como histórico</button>
+    <div id="admin-msg"></div>
+  </section>
+</main>
+<footer>Specs: constitution + 001-prediccion-visitantes · <a href="/docs">/docs</a></footer>
+<script src="/static/app.js"></script>
+</body>
+</html>

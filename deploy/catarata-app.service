@@ -1,0 +1,13 @@
+[Unit]
+Description=Catarata Las Golondrinas API
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/catarata-golondrinas/backend
+EnvironmentFile=/home/ubuntu/catarata-golondrinas/backend/.env
+ExecStart=/home/ubuntu/catarata-golondrinas/backend/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
